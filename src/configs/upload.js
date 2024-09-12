@@ -1,9 +1,18 @@
 const multer = require("multer");
 const crypto = require("crypto");
 const path = require("path");
+const fs = require("fs");
 
 const TMP_FOLDER = path.resolve(__dirname, "..", "..", "tmp");
 const UPLOADS_FOLDER = path.resolve(TMP_FOLDER, "uploads");
+
+if (!fs.existsSync(TMP_FOLDER)) {
+  fs.mkdirSync(TMP_FOLDER, { recursive: true });
+}
+
+if (!fs.existsSync(UPLOADS_FOLDER)) {
+  fs.mkdirSync(UPLOADS_FOLDER, { recursive: true });
+}
 
 const MULTER = {
   storage: multer.diskStorage({
@@ -20,5 +29,5 @@ const MULTER = {
 module.exports = {
   TMP_FOLDER,
   UPLOADS_FOLDER,
-  MULTER
-}
+  MULTER,
+};
